@@ -1,7 +1,7 @@
 <script type="text/javascript">
     window.___gcfg = {
-        lang: '{!$config->locale}',
-        parsetags: '{!$config->parsetags}'
+        lang: '{$config->locale|noescape}',
+        parsetags: '{$config->parsetags|noescape}'
     };
 
     (function () {
