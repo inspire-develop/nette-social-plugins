@@ -4,6 +4,7 @@ namespace HostBox\Components;
 
 use Exception;
 use Nette\Application as Nette;
+use Nette\DI\PhpReflection;
 use Nette\Reflection\ClassType;
 
 
@@ -39,7 +40,7 @@ abstract class SocialPluginComponent extends Nette\UI\Control implements ISocial
         if (!is_array($settings) || empty($settings))
             return;
 
-        $properties = $this->getReflection()->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $properties = ClassType::from($this)->getProperties(\ReflectionProperty::IS_PUBLIC);
         if (count($properties) > 0) {
             foreach ($properties as $property) {
                 if ($property->getDeclaringClass() == 'Nette\Application\UI\Control') {
@@ -66,7 +67,7 @@ abstract class SocialPluginComponent extends Nette\UI\Control implements ISocial
             }
         }
 
-        $reflection = $this->getReflection();
+        $reflection = ClassType::from($this);
         $fileName = $reflection->getFileName();
         $componentFolder = substr($fileName, 0, strrpos($fileName, $reflection->getShortName()) - 1) . '/templates';
 
@@ -81,7 +82,7 @@ abstract class SocialPluginComponent extends Nette\UI\Control implements ISocial
      * @return void
      */
     protected function putSettingsIntoTemplate($tempSettings = array()) {
-        $properties = $this->getReflection()->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $properties = ClassType::from($this)->getProperties(\ReflectionProperty::IS_PUBLIC);
 
         if (count($properties) > 0) {
             $result = array();
@@ -130,7 +131,7 @@ abstract class SocialPluginComponent extends Nette\UI\Control implements ISocial
      * @return void
      */
     protected function putDistinctionIntoTemplate() {
-        $reflection = $this->getReflection();
+        $reflection = ClassType::from($this);
         $identifier = $reflection->getAnnotation('identifier');
         if ($identifier === NULL) {
             throw new Exception(sprintf('Class %s has not "identifier" annotation', $reflection->getShortName()));
@@ -139,12 +140,22 @@ abstract class SocialPluginComponent extends Nette\UI\Control implements ISocial
     }
 
     /**
+     * Access to reflection.
+     *
+     * @return ComponentReflection
+     */
+    protected function getReflectionSocial()
+    {
+        return ClassType::from($this);
+    }
+
+    /**
      * @param $name
      * @return string|null
      * @throws \Exception
      */
     protected function fillVariablesInAnnotation($name) {
-        $reflection = $this->getReflection();
+        $reflection = ClassType::from($this);
         $annotation = $reflection->getAnnotation($name);
         if ($annotation === NULL) {
             return NULL;
