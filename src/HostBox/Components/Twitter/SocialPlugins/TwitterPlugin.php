@@ -4,6 +4,7 @@ namespace HostBox\Components\Twitter\SocialPlugins;
 
 use Exception;
 use HostBox\Components\SocialPluginComponent;
+use Nette\Reflection\ClassType;
 
 
 abstract class TwitterPlugin extends SocialPluginComponent {
@@ -30,7 +31,7 @@ abstract class TwitterPlugin extends SocialPluginComponent {
      */
     protected function putDistinctionIntoTemplate() {
         parent::putDistinctionIntoTemplate();
-        $reflection = $this->getReflection();
+        $reflection = ClassType::from($this);
         if (!$reflection->hasAnnotation('href')) {
             throw new Exception(sprintf('Class %s has not "href" annotation', $reflection->getShortName()));
         }

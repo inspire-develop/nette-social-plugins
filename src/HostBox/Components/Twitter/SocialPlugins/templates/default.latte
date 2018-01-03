@@ -1,1 +1,1 @@
-<a href="https://twitter.com/{$href}" class="{$identifier}" {!$pluginSettings} data-lang="{$config->lang}">{ifset $text}{!$text}{else}Tweet{/ifset}</a>
+<a href="https://twitter.com/{$href}" class="{$identifier}" {$pluginSettings|noescape} data-lang="{$config->lang}">{ifset $text}{$text|noescape}{else}Tweet{/ifset}</a>

@@ -3,6 +3,7 @@
 namespace HostBox\Components\Pinterest\SocialPlugins;
 
 use HostBox\Components\SocialPluginComponent;
+use Nette\Reflection\ClassType;
 
 
 /**
@@ -15,7 +16,7 @@ abstract class PinterestPlugin extends SocialPluginComponent {
      */
     protected function putDistinctionIntoTemplate() {
         parent::putDistinctionIntoTemplate();
-        $reflection = $this->getReflection();
+        $reflection = ClassType::from($this);
         if (!$reflection->hasAnnotation('href')) {
             throw new \Exception(sprintf('Class %s has not "href" annotation', $reflection->getShortName()));
         }

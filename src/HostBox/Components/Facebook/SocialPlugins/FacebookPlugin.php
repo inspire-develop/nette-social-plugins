@@ -40,7 +40,7 @@ abstract class FacebookPlugin extends SocialPluginComponent {
      */
     public function renderJsScript() {
         $this->template->config = $this->config;
-        $this->template->registerHelper('booleanToInt', function ($value) {
+        $this->template->getLatte()->addFilter('booleanToInt', function ($value) {
             return $value ? '1' : '0';
         });
         parent::renderJsScript();
