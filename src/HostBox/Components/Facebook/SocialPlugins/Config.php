@@ -2,14 +2,20 @@
 
 namespace HostBox\Components\Facebook\SocialPlugins;
 
-use Nette;
-
+use Nette\SmartObject;
 
 /**
+ * @property string $appId
+ * @property string $status
+ * @property string $xfbml
+ * @property string $locale
+ *
  * Class Config
  * @package HostBox\Components\Facebook\SocialPlugins
  */
-class Config extends Nette\Object {
+class Config {
+
+    use SmartObject;
 
     /** @var string */
     private $appId;

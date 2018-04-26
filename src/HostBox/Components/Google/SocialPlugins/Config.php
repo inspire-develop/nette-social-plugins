@@ -2,10 +2,15 @@
 
 namespace HostBox\Components\Google\SocialPlugins;
 
-use Nette;
+use Nette\SmartObject;
 
+/**
+ * @property string $locale
+ * @property string $parsetags
+ */
+class Config {
 
-class Config extends Nette\Object {
+    use SmartObject;
 
     const
         PARSETAG_ONLOAD = 'onload',

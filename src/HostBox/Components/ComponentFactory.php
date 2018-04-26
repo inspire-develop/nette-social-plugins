@@ -6,7 +6,9 @@ use Nette;
 use Nette\Reflection\ClassType;
 
 
-abstract class ComponentFactory extends Nette\Object {
+abstract class ComponentFactory {
+
+    use Nette\SmartObject;
 
     /** @var mixed */
     protected $config;

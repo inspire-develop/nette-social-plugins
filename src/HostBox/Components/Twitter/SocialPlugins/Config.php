@@ -2,10 +2,15 @@
 
 namespace HostBox\Components\Twitter\SocialPlugins;
 
-use Nette;
 
+use Nette\SmartObject;
 
-class Config extends Nette\Object {
+/**
+ * @property string $lang
+ */
+class Config {
+
+    use SmartObject;
 
     /**
      * ISO-639-1 format
