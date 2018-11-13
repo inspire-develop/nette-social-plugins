@@ -5,7 +5,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/{$config->locale|noescape}/all.js#xfbml={$config->locale|booleanToInt|noescape}&appId={$config->appId|noescape}";
+        js.src = "https://connect.facebook.net/{$config->locale|noescape}/all.js#xfbml={$config->locale|booleanToInt|noescape}&appId={$config->appId|noescape}";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
